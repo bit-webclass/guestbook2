@@ -13,10 +13,10 @@
 				<td>비밀번호</td>
 				<td><input type="password" name="password"></td>
 				<td><input type="submit" value="확인"></td>
-				<td><a href="./addlist.jsp">메인으로 돌아가기</a></td>
+				<td><a href="/guestbook2/gb">메인으로 돌아가기</a></td>
 			</tr>
 		</table>
-		<input type='text' name="a" value="delete">
+		<input type='text' name="action" value="delete">
 		<input type='text' name="no" value="<%=request.getParameter("no")%>">
 	</form>
 </body>

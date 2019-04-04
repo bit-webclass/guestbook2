@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class WebUtil {
 
-	public static void forword(HttpServletRequest request, 
+	public static void forward(HttpServletRequest request, 
 			            HttpServletResponse response, String path) throws ServletException, IOException {
 		
 		RequestDispatcher rd = request.getRequestDispatcher(path);

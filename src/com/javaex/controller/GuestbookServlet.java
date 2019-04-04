@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.javaex.dao.GuestbookDao;
+import com.javaex.util.WebUtil;
 import com.javaex.vo.GuestbookVo;
 
 @WebServlet("/gb")
@@ -21,7 +22,7 @@ public class GuestbookServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		String actionName = request.getParameter("a");
+		String actionName = request.getParameter("action");
 
 		if ("add".equals(actionName)) {
 
@@ -34,14 +35,15 @@ public class GuestbookServlet extends HttpServlet {
 			dao.insert(vo);
 			System.out.println(vo.toString());
 
-			response.sendRedirect("/mysite/gb");
-			//WebUtil.redirect(request, response, "/emailbook2/el");
+			//response.sendRedirect("/guestbook2/gb");
+			WebUtil.redirect(request, response, "/guestbook2/gb");
 
 		} else if ("deleteform".equals(actionName)) {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/guestbook/deleteform.jsp");
-			rd.forward(request, response);
 			
-			//WebUtil.forword(request, response, "/WEB-INF/write.jsp");
+			WebUtil.forward(request, response, "/WEB-INF/deleteForm.jsp");
+			
+			//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/deleteform.jsp");
+			//rd.forward(request, response);
 
 		} else if ("delete".equals(actionName)) {
 			int no = Integer.parseInt(request.getParameter("no"));
@@ -53,15 +55,18 @@ public class GuestbookServlet extends HttpServlet {
 
 			GuestbookDao dao = new GuestbookDao();
 			dao.delete(vo);
-
-			response.sendRedirect("/mysite/gb");
+			
+			WebUtil.redirect(request, response, "/guestbook2/gb");
+			//response.sendRedirect("/guestbook2/gb");
 		} else {
 			GuestbookDao dao = new GuestbookDao();
 			List<GuestbookVo> list = dao.getList();
 
 			request.setAttribute("list", list);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/guestbook/list.jsp");
-			rd.forward(request, response);
+			
+			WebUtil.forward(request, response, "/WEB-INF/addList.jsp");
+			//RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/guestbook/list.jsp");
+			//rd.forward(request, response);
 		}
 
 	}

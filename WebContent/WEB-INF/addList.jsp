@@ -17,11 +17,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="add.jsp" method="post">
-	<table border=1 width=500>
+	<form action="/guestbook2/gb?action=add" method="post">
+	<table border=1 width=510>
 		<tr>
 			<td>이름</td><td><input type="text" name="name"></td>
-			<td>비밀번호</td><td><input type="password" name="pass"></td>
+			<td>비밀번호</td><td><input type="password" name="password"></td>
 		</tr>
 		<tr>
 			<td colspan=4><textarea name="content" cols=60 rows=5></textarea></td>
@@ -41,7 +41,7 @@
 					<td>[<%=vo.getNo() %>]</td>
 					<td><%=vo.getName() %></td>
 					<td><%=vo.getRegDate() %></td>
-					<td><a href="./deleteform.jsp?no=<%=vo.getNo() %>">삭제</a></td>
+					<td><a href="/guestbook2/gb?action=deleteform&no=<%=vo.getNo() %>">삭제</a></td>
 				</tr>
 				<tr>
 					<td colspan=4><%=vo.getContent() %></td>
